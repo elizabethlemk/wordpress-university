@@ -69,11 +69,10 @@ class Search {
   }
 
   getResults() {
-    // ${
-    //   uniData.root_url
-    // }wp-json/university/v1/search?term=${this.searchField.val()}
     $.getJSON(
-      `http://localhost:3000/wp-json/university/v1/search?term=${this.searchField.val()}`,
+      `${
+        uniData.root_url
+      }/wp-json/university/v1/search?term=${this.searchField.val()}`,
       results => {
         this.searchResults.html(`
           <div class="row">
@@ -82,7 +81,7 @@ class Search {
               ${
                 results.general.length
                   ? '<ul class="link-list min-list">'
-                  : "<p>No results</p>"
+                  : "<p>No general information matches your search</p>"
               }
                 ${results.general
                   .map(result => {
@@ -101,7 +100,9 @@ class Search {
               ${
                 results.programs.length
                   ? '<ul class="link-list min-list">'
-                  : "<p>No results</p>"
+                  : `<p>No programs match your search. <a href="${
+                      uniData.root_url
+                    }/programs">View all programs.</a></p>`
               }
                 ${results.programs
                   .map(result => {
@@ -140,7 +141,9 @@ class Search {
               ${
                 results.campuses.length
                   ? '<ul class="link-list min-list">'
-                  : "<p>No results</p>"
+                  : `<p>No campuses match your search. <a href="${
+                      uniData.root_url
+                    }/programs">View all campuses.</a></p>`
               }
                 ${results.campuses
                   .map(result => {
@@ -155,7 +158,9 @@ class Search {
               ${
                 results.events.length
                   ? ""
-                  : "<p>No events match that search.</p>"
+                  : `<p>No events match that search. <a href="${
+                      uniData.root_url
+                    }/programs">View all events.</a></p>`
               }
                 ${results.events
                   .map(result => {
