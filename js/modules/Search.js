@@ -74,6 +74,7 @@ class Search {
         uniData.root_url
       }/wp-json/university/v1/search?term=${this.searchField.val()}`,
       results => {
+        console.log(results);
         this.searchResults.html(`
           <div class="row">
             <div class="one-third">
